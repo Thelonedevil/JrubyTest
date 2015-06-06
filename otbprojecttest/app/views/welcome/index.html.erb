@@ -1,3 +1,4 @@
+<% content_for :title do %><%='Home'%><%end%>
 <div>
     <% @channels.each do |channel| %>
         <a href="#" data-dropdown="drop-<%= channel %>" class="button"><%= channel %></a>

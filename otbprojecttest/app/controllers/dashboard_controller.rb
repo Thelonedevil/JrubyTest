@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
     user_level = params[:user_level]
     all = params[:all]
     @channel = params[:channel]
-    case user_level.split('?').first
+    case user_level
       when 'all'
         getCommands(%w(DEFAULT SUBSCRIBER REGULAR MODERATOR SUPER-MODERATOR BROADCASTER))
       when 'usr'
@@ -45,7 +45,6 @@ class DashboardController < ApplicationController
   def getCommands(user_level)
 
     ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: "~/.otbproject/data/channels/#{@channel}/main.db"
-    puts ActiveRecord::Base.connection.tables
     @command = Command.where(execUserLevel: user_level)
     @command.to_a.sort!
     #Command.where(execUserLevel: user_level)

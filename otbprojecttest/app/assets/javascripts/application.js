@@ -17,3 +17,33 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+function create(url) {
+
+    $('#loadingModal').foundation('reveal', 'open');
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: createSuccessHandler(url),
+        error: createErrorHandler,
+        complete: hideLoadingImage
+    });
+
+}
+
+function createSuccessHandler(url) {
+
+    window.location.href = url
+
+}
+
+function createErrorHandler(data) {
+
+    alert("It failed, ffs!")
+
+}
+
+function hideLoadingImage() {
+    $('#loadingModal').foundation('reveal', 'close');
+}

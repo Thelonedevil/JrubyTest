@@ -1,8 +1,48 @@
-<% content_for :title do %> <%= params[:channel] %>
+<% content_for :title do %><%= params[:channel] %>
 <% end %>
-<div class="panel callout radius"><h1>Commands for <small><%= params[:channel] %></small>
-</h1></div>
-<p>Find me in app/views/dashboard/command.html.erb</p>
+<% content_for :channel do %><%= params[:channel] %>
+<% end %>
+<div class="panel callout radius">
+    <h1>
+        <% all = params[:all] %>
+        <% case params[:user_level] %>
+        <% when 'all' %>
+            <%= "All commands for #{params[:channel]}" %>
+        <% when 'usr' %>
+            <%= "Commands for a user of #{params[:channel]}" %>
+        <% when 'sub' %>
+            <% if !all.nil? && all == 'all' %>
+                <%= "All commands for a subscriber of #{params[:channel]}" %>
+            <% else %>
+                <%= "Subscriber commands for #{params[:channel]}" %>
+            <% end %>
+        <% when 'reg' %>
+            <% if !all.nil? && all == 'all' %>
+                <%= "All commands for a regular of #{params[:channel]}" %>
+            <% else %>
+                <%= "Regular commands for #{params[:channel]}" %>
+            <% end %>
+        <% when 'mod' %>
+            <% if !all.nil? && all == 'all' %>
+                <%= "All commands for a moderator of #{params[:channel]}" %>
+            <% else %>
+                <%= "Moderator commands for #{params[:channel]}" %>
+            <% end %>
+        <% when 'smd' %>
+            <% if !all.nil? && all == 'all' %>
+                <%= "All commands for a super-moderator of #{params[:channel]}" %>
+            <% else %>
+                <%= "Super-Moderator commands for #{params[:channel]}" %>
+            <% end %>
+        <% when 'own' %>
+            <% if !all.nil? && all == 'all' %>
+                <%= "All commands for #{params[:channel]}" %>
+            <% else %>
+                <%= "Broadcaster only commands for #{params[:channel]}" %>
+            <% end %>
+        <% else %>
+        <% end %></h1>
+</div>
 <table>
     <tr>
         <th>Name</th>
